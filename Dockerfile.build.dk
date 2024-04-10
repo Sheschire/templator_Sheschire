@@ -1,0 +1,21 @@
+
+
+ARG POETRY_VERSION=1.6.1
+
+ENV PIP_NO_CACHE_DIR=1
+
+ENV HTTP_PROXY=http://proxy-app.groupement.systeme-u.fr:80
+
+ENV HTTPS_PROXY=http://proxy-app.groupement.systeme-u.fr:80
+
+ENV NO_PROXY=groupement.systeme-u.fr
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+
+ENV POETRY_NO_INTERACTION=1
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN python3 -m pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org poetry==$POETRY_VERSION

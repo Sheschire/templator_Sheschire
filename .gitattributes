@@ -1,0 +1,9 @@
+# @license UNLICENSED
+# @copyright U IRIS. All rights reserved.
+# @author Florian Daguin <florian.daguin@systeme-u.fr>
+
+# @file git attributes file.
+# @see https://git-scm.com/
+# @see https://git-scm.com/docs/gitattributes
+
+* text=auto eol=lf

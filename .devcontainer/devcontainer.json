@@ -1,0 +1,56 @@
+{
+  "name": "Robot Framework IRIS dev environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "extensions": [
+    "ms-python.vscode-pylance",
+    "robocorp.robotframework-lsp",
+    "tamasfe.even-better-toml",
+    "vsls-contrib.codetour",
+    "redhat.vscode-yaml",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig"
+  ],
+  "settings": {
+    "remote.extensionKind": {
+      "robocorp.robotframework-lsp": "workspace",
+      "ms-python.vscode-pylance": "workspace",
+      "tamasfe.even-better-toml": "workspace",
+      "vsls-contrib.codetour": "workspace",
+      "redhat.vscode-yaml": "workspace",
+      "mikestead.dotenv": "workspace",
+      "editorconfig.editorconfig": "workspace"
+    },
+    "python.pythonPath": "${containerWorkspaceFolder}/.venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "robot.language-server.python": "${containerWorkspaceFolder}/.venv/bin/python",
+    "robot.lint.robocop.enabled": true,
+    "robot.codeFormatter": "robotidy",
+    "[robotframework]": {
+      "editor.formatOnSave": true
+    },
+  },
+  "containerEnv": {
+    "DISPLAY": "host.docker.internal:0.0",
+    "LIBGL_ALWAYS_INDIRECT": "0",
+    "HTTP_PROXY": "http://proxy-app.groupement.systeme-u.fr:80",
+    "HTTPS_PROXY": "http://proxy-app.groupement.systeme-u.fr:80",
+    "NO_PROXY": "groupement.systeme-u.fr",
+    "NODE_TLS_REJECT_UNAUTHORIZED": "0",
+    "USER_CI": "${localEnv:USER_CI}",
+    "PASSWORD_CI": "${localEnv:PASSWORD_CI}",
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1",
+    "RF_DEV_MODE_ENABLED": "false"
+  },
+  "runArgs": [
+    "--env-file", "${localWorkspaceFolder}/atest/env/default.env",
+    "--env-file", "${localWorkspaceFolder}/atest/env/default.secret.env",
+  ],
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-bashhistory,target=/commandhistory,type=volume"
+  ],
+  "postStartCommand": "poetry config http-basic.py-releases $USER_CI -- $PASSWORD_CI && poetry install && poetry run poe install:browser"
+}

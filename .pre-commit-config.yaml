@@ -1,0 +1,35 @@
+# @license UNLICENSED
+# @copyright U IRIS. All rights reserved.
+# @author Florian Daguin <florian.daguin@systeme-u.fr>
+
+# @file pre-commit configuration file.
+# @see https://pre-commit.com/
+# @see https://pre-commit.com/#2-add-a-pre-commit-configuration
+
+repos:
+  - repo: local
+    hooks:
+      - id: "fmt:rf"
+        name: Format the Robot Framework codebase
+        entry: poetry run poe fmt
+        language: system
+        types: [file]
+        files: \.(robot|resource)$
+        stages: [commit, push]
+        pass_filenames: false
+      - id: "lint:rf"
+        name: Lint the Robot Framework codebase
+        entry: poetry run poe lint
+        language: system
+        types: [file]
+        files: \.(robot|resource)$
+        stages: [commit, push]
+        pass_filenames: false
+      - id: install missing dependencies
+        name: Install missing dependencies
+        entry: poetry install && poetry run poe install
+        language: system
+        types: [file]
+        files: ^(poetry.lock)$
+        stages: [post-merge]
+        pass_filenames: false

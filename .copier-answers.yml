@@ -1,0 +1,16 @@
+_commit: v14.1.0
+_src_path: gh:ugieiris/template-robotframework
+artifactory_fqdn: artifactory-iris.groupement.systeme-u.fr
+git_default_branch: master
+github_username: Sheschire
+maintainer_email: theo.lemesle@externe.systeme-u.fr
+maintainer_full_name: U_IRIS_CIQ_AUTOMATISATION
+project_name: templator
+project_name_pypi: robotframework-templator
+project_name_python_package: templator
+project_sheet_id: ''
+project_short_description: test diffusion template
+project_slug: templator-test-rf
+ship_tests: false
+test_family: other
+

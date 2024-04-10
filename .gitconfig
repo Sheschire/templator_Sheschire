@@ -1,0 +1,11 @@
+[user]
+	email = theo.lemesle42@gmail.com
+	name = Sheschire
+[credential]
+	helper = wincred
+[core]
+	autocrlf = true
+[http]
+	sslCAinfo = D:\\certs\\ZscalerRootCertificate-2048-SHA256.crt
+[color]
+	ui = true

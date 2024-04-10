@@ -1,0 +1,24 @@
+# @file GitHub code owners file.
+# @see https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-code-owners
+
+*   @sbeignon
+.devcontainer/   @TLELUHER
+.github/   @TLELUHER
+.vscode/   @TLELUHER
+.editorconfig   @TLELUHER
+.folderslintrc   @TLELUHER
+.gitattributes   @TLELUHER
+.gitignore   @TLELUHER
+.ls-lint.yml   @TLELUHER
+.npmrc   @TLELUHER
+.pre-commit-config.yaml   @TLELUHER
+.yamllint.yml   @TLELUHER
+Dockerfile.build.dk   @TLELUHER
+Jenkinsfile   @TLELUHER
+commitlint.config.js   @TLELUHER
+config.xlaunch   @TLELUHER
+launch.ps1   @TLELUHER
+poetry.toml   @TLELUHER
+tasks.py   @TLELUHER
+workspace.code-workspace   @TLELUHER
+

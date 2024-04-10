@@ -1,0 +1,17 @@
+# @license UNLICENSED
+# @copyright U IRIS. All rights reserved.
+# @author Florian Daguin <florian.daguin@systeme-u.fr>
+
+# @file ls-lint configuration file.
+# @see https://github.com/loeffel-io/ls-lint
+# @see https://ls-lint.org/1.x/configuration/the-basics.html#creating-configuration
+
+ls:
+  '{src,atest}':
+    .robot: snake_case | PascalCase
+    .resource: camelCase | PascalCase
+  .env: kebab-case
+
+ignore:
+  - .git
+  - .venv

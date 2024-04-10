@@ -1,0 +1,12 @@
+# @license UNLICENSED
+# @copyright U IRIS. All rights reserved.
+# @author Florian Daguin <florian.daguin@systeme-u.fr>
+
+# @file GitHub template chooser configuration file for issues.
+# @see https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+
+blank_issues_enabled: false
+contact_links:
+  - name: Send an email to the maintainer U_IRIS_CIQ_AUTOMATISATION
+    url: mailto:theo.lemesle@externe.systeme-u.fr
+    about: For any questions or requests

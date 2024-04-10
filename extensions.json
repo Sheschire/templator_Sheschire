@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ms-python.vscode-pylance",
+    "robocorp.robotframework-lsp",
+    "tamasfe.even-better-toml",
+    "vsls-contrib.codetour",
+    "redhat.vscode-yaml",
+    "mikestead.dotenv",
+    "ms-vscode.powershell",
+    "editorconfig.editorconfig"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "rules": [
+    "assets/**",
+    "atest/env",
+    "atest/suites/**",
+    "docs/**",
+    "misc/**",
+    "src/u_iris/templator/rf-resources/**"
+  ]
+}

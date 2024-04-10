@@ -1,0 +1,17 @@
+# @license UNLICENSED
+# @copyright U IRIS. All rights reserved.
+# @author Florian Daguin <florian.daguin@systeme-u.fr>
+
+# @file EditorConfig configuration file.
+# @see https://editorconfig.org/
+# @see https://editorconfig.org/#example-file
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{yml,yaml,toml,json}]
+indent_size = 2

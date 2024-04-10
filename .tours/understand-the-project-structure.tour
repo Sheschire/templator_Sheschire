@@ -1,0 +1,56 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Understand the project structure",
+  "steps": [
+    {
+      "directory": "src",
+      "description": "The `src` folder contains the reusable keywords needed for the test suites."
+    },
+    {
+      "directory": "src/u_iris/templator/rf-resources",
+      "description": "The folder `rf-resources` is a requirement for the [robotframework-importresource](https://github.com/rasjani/robotframework-importresource) library. The latter allows us to share/import the resource files through Python packages."
+    },
+    {
+      "file": "src/u_iris/templator/rf-resources/index.resource",
+      "description": "`index.resource` is the main resource file. It is used to import all the others resource files, either stored in subfolders or in the same directory.\r\n\r\nNote the mandatory `.resource` extension.",
+      "line": 1
+    },
+    {
+      "directory": "atest",
+      "description": "All the test suites related content will be located in the `atest` folder (aka Acceptance test)."
+    },
+    {
+      "directory": "atest/suites",
+      "description": "Specifically, test suites will be located under the `suites` folder."
+    },
+    {
+      "file": "atest/suites/index.robot",
+      "description": "This `index.robot` file is shared between all the test suites. It is used to import the project's resource files. Moreover, it's also the place where the content shared between the suites can be set, such as variables.",
+      "line": 1
+    },
+    {
+      "directory": "atest/env",
+      "description": "All the SUT variables will be defined in the `env` folder."
+    },
+    {
+      "file": "atest/env/default.env",
+      "description": "All the non-sensitive data will be stored in `.env` files. The `default.env` file is the one being automatically loaded.",
+      "line": 1
+    },
+    {
+      "file": "atest/env/default.secret.env",
+      "description": "All the sensitive content will be stored in `.secret.env` files. `default.secret.env` is the one being automatically loaded.",
+      "line": 1
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "In a nutshell, `pyproject.toml` is used to define the project's metadata and dependencies.",
+      "line": 1
+    },
+    {
+      "file": "tasks.py",
+      "description": "`tasks.py` is used to create predefined tasks for executing the Robot Framework tests.",
+      "line": 1
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Add new dependency",
+  "steps": [
+    {
+      "directory": "",
+      "description": "To add a new dependency, simply run the following command:\n\n```bash\npoetry add dependency_name\n```"
+    },
+    {
+      "file": "pyproject.toml",
+      "description": "Next, edit the section `[tool.poetry2conda.dependencies]` of the `pyproject.toml` file.\r\n\r\nAdd the following entry:\r\n\r\n```toml\r\ndependency_name = { channel = \"pip\" }\r\n```\r\n\r\nThis will make dependency installable using Conda.",
+      "line": 1
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "robot.language-server.python": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "robot.lint.robocop.enabled": true,
+    "robot.codeFormatter": "robotidy",
+    "[robotframework]": {
+      "editor.formatOnSave": true
+    },
+  }
+}
