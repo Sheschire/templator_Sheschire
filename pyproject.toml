@@ -1,156 +1,102 @@
 [tool.poetry]
-name = "u-iris.robotframework-templator"
+name = "u-iris.update-robotframework-projects"
 version = "0.1.0"
-description = "test diffusion template"
-packages = [
-  { include = "u_iris", from = "src" },
-]
-
-authors = ["U_IRIS_CIQ_AUTOMATISATION <theo.lemesle@externe.systeme-u.fr>"]
-maintainers = ["U_IRIS_CIQ_AUTOMATISATION <theo.lemesle@externe.systeme-u.fr>"]
+description = "Mise à jour des projets robotframework à partir du template https://github.com/ugieiris/template-robotframework avec l'outil Copier"
+authors = ["UDSI_TESTING <UDSI_TESTING@systeme-u.fr>"]
 license = "Proprietary"
 readme = "README.md"
-homepage = "https://github.com/Sheschire/templator-test-rf"
-repository = "https://github.com/Sheschire/templator-test-rf"
-documentation = "https://github.com/Sheschire/templator-test-rf#README.md"
-keywords = [
-  "robotframework",
-  "testing",
-  "acceptancetesting",
-]
+homepage = "https://github.com/ugieiris/update-robotframework-projects"
+repository = "https://github.com/ugieiris/update-robotframework-projects"
+documentation = "https://github.com/ugieiris/update-robotframework-projects#README.md"
+keywords = []
 classifiers = [
+  "Environment :: Console",
   "Operating System :: OS Independent",
-  "Framework :: Robot Framework",
-  "Topic :: Software Development :: Testing",
-  "Topic :: Software Development :: Testing :: Acceptance",
-  "Topic :: Software Development :: Testing :: BDD",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
 ]
+packages = [{include = "u_iris", from = "src"}]
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/Sheschire/templator-test-rf/issues"
+"Bug Tracker" = "https://github.com/ugieiris/update-robotframework-projects/issues"
 
 [[tool.poetry.source]]
 name = "py-releases"
 url = "https://artifactory-iris.groupement.systeme-u.fr/artifactory/api/pypi/py-repo/simple"
 priority = "default"
 
+[tool.poetry.scripts]
+update-robotframework-projects = "u_iris.update_robotframework_projects.cli:main"
+
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-robotframework = "6.1.1"
-rpaframework-google = "^8.1.0"
-robotframework-requests = "^0.9.0"
-
-
+python = "^3.11"
+click = "^8.1.3"
+pydantic = {extras = ["dotenv"], version = "^2.6.4"}
+cookiecutter = "^2.6.0"
+copier = "^9.2.0"
 
 [tool.poetry.dev-dependencies]
-poetry2conda = "^0.3.0"
-robotframework-robocop = "^4.0.0"
-poethepoet = "^0.24.0"
-robotframework-tidy = "^4.6.0"
-pre-commit = "^2.13.0"
-python-certifi-win32 = "^1.6.1"
-"u-iris.robotframework-robocop-config" = "^1.0.1"
-python-dotenv = "^0.18.0"
-invoke = "^1.6.0"
-robotframework-metrics = "^3.2.2"
-robotframework-pabot = "^2.0.1"
+poethepoet = "^0.20.0"
+pytest = "^7.3.1"
+flake8 = "^6.0.0"
+black = "^23.3.0"
+safety = "^2.3.5"
+isort = "^5.12.0"
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["unit"]
 
 [tool.poe.tasks]
-"install" = { sequence = ["install:pre-commit",], help = "install additional requirements" }
-"install:pre-commit" = { cmd = "pre-commit install", help = "install pre-commit hooks"}
-
-"fmt" = { sequence = ["fmt:rf"], help = "format all the codebase" }
-"fmt:rf" = { cmd = "robotidy --verbose", help = "format the Robot Framework codebase" }
-"lint" = { sequence = ["lint:rf"], help = "lint all the codebase" }
-"lint:rf" = { sequence = ["lint:rf:robocop", "lint:rf:robotidy"], help = "lint the Robot Framework codebase" }
-"lint:rf:robocop" = { cmd = "robocop", help = "lint the Robot Framework codebase with Robocop" }
-"lint:rf:robotidy" = { cmd = "robotidy --no-overwrite --diff --verbose --check", help = "lint the Robot Framework codebase with Robotidy"  }
-"test" = { sequence = ["test:unit", "test:integration"], help = "run all the tests" }
-"test:unit" = { sequence = ["_test:unit:install", "_test:unit:run"], help = "run unit tests" }
-"_test:unit:install" = { sequence = ["_test:unit:install:browser",], help = "install additional requirements" }
-"_test:unit:install:browser" = { cmd = "rfbrowser init --skip-browsers" }
-"_test:unit:run" = { cmd = "invoke run --env-file 'atest/env/default.env' --env-file ${SECRET_PATH} --exclude 'quarantine'", env = { RF_BROWSER_NAME = "chromium", RF_BROWSER_RUN_HEADLESS = "true", RF_DEV_MODE_ENABLED = "false", DISPLAY = "" }}
-"test:integration" = { cmd = "echo 'todo'", help = "run integration tests" }
-"freeze" = { sequence = ["freeze:conda", "freeze:pip"], help = "freeze dependencies" }
-"freeze:conda" = { cmd = "poetry2conda pyproject.toml environment.yml", help = "freeze installed packages in conda environment.yml format" }
-"freeze:pip" = { sequence = ["_freeze:pip", "_freeze:pip:dev"], help = "freeze installed packages in requirements.txt format" }
-"_freeze:pip" = "poetry export --format requirements.txt --output requirements.txt"
-"_freeze:pip:dev" = "poetry export --format requirements.txt --dev --output requirements-dev.txt"
-"deploy:prepare" = { sequence = ["freeze"], help = "prepare the deployment unit" }
-
-[tool.poetry2conda]
-name = "robot"
-
-[tool.poetry2conda.dependencies]
-robotframework = { channel = "pip" }
-rpaframework-google = { channel = "pip" }
-robotframework-requests = { channel = "pip" }
-
-
-[tool.robocop]
-paths = [
-  "src",
-  "atest/suites",
+[tool.poe.tasks."lint"]
+sequence = [
+    "lint:flake8",
+    "lint:safety",
+    "lint:isort",
+    "lint:black"
 ]
-exclude = [
-  # @see section-variable-not-uppercase
-  "W0309",
-  # @see can-be-resource-file
-  "I0913",
-  "I0924",
-]
-ext_rules = [
-  "u_iris.robocop_config",
-]
-reports = ["all"]
-filetypes = [".robot", ".resource"]
-threshold = "I"
-format = "{source}:{line}:{col} [{severity}] {rule_id} {desc} (name)"
-configure = [
-  "return_status:quality_gate:E=0:W=0:I=-1",
-  "line-too-long:line_length:130",
-  "missing-doc-keyword:severity:I",
-  "missing-doc-suite:severity:I",
-  "missing-doc-test-case:severity:I",
-  "wrong-case-in-keyword-name:convention:first_word_capitalized",
-  "too-many-calls-in-test-case:max_calls:20",
-  "too-many-calls-in-test-case:severity:I",
-  "too-many-calls-in-keyword:max_calls:20",
-  "too-many-calls-in-keyword:severity:I",
-  "leaking-secret:pattern:pass(word)?,pwd",
-  "undefined-environment-variable-prefix:prefix:RF_",
-]
-no_recursive = false
+help = "Lint the python codebase with all the tools"
+ignore_fail = "return_non_zero"
 
-[tool.robotidy]
-src = [
-  "src",
-  "atest/suites",
-]
-overwrite = true
-spacecount = 4
-lineseparator = "unix"
-configure = [
-  "AlignVariablesSection:enabled=False",
-  "AlignSettingsSection:enabled=False",
-  "SmartSortKeywords:enabled=False",
-  "DiscardEmptySections:allow_only_comments=False",
-  "NormalizeAssignments:equal_sign_type=remove",
-  "NormalizeNewLines:section_lines=2:consecutive_lines=0:separate_templated_tests=False",
-  "SplitTooLongLine:split_on_every_arg=True:line_length=130",
-  "InlineIf:enabled=True:line_length=130",
-  "RenameTestCases:enabled=False",
-  "RenameKeywords:enabled=False",
-  "AlignTestCasesSection:enabled=False",
-  "OrderTags:enabled=True",
-  "NormalizeTags:enabled=True",
-]
+[tool.poe.tasks."lint:flake8"]
+cmd = "flake8 ."
+help = "Lint the python codebase to detect code smells or styling issues with flake8"
 
-[tool.cruft]
-skip = [
-  "src/u_iris/templator/rf-resources",
-  "atest",
-]
+[tool.poe.tasks."lint:safety"]
+cmd = "safety check --full-report"
+help = "Check the python dependencies to find vulnerabilities"
+
+[tool.poe.tasks."lint:isort"]
+cmd = "isort --color ."
+help = "Lint the python codebase for incorrect imports with isort"
+
+[tool.poe.tasks."lint:black"]
+cmd = "black --check --diff --color ."
+help = "Lint the python codebase to detect styling issues with black"
+
+[tool.poe.tasks."format:black"]
+cmd = "black --color ."
+help = "Format the python codebase with black"
+
+[tool.poe.tasks."test:unit"]
+cmd = "pytest"
+help = "Run unit tests"
+
+[tool.poe.tasks."test:integration"]
+cmd = "echo 'no integration tests'"
+help = "Run integration tests"
+
+[tool.poe.tasks."deploy:prepare"]
+cmd = "poetry export --format requirements.txt --output requirements.txt"
+help = "Prepare the deployment unit: generate requirements.txt"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
